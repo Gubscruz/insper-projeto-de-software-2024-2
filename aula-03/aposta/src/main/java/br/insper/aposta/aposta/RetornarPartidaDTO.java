@@ -11,4 +11,5 @@ public class RetornarPartidaDTO {
     private Integer placarMandante;
     private Integer placarVisitante;
     private String status;
+
 }
