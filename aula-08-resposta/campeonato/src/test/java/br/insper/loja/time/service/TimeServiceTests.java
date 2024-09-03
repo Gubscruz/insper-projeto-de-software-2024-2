@@ -25,6 +25,9 @@ public class TimeServiceTests {
     @Mock
     private TimeRepository timeRepository;
 
+
+    // ***** LISTAR-TIMES *****
+
     @Test
     public void testListarTimesWhenEstadoIsNull() {
 
@@ -60,6 +63,11 @@ public class TimeServiceTests {
         Assertions.assertEquals("time-1", times.getFirst().getIdentificador());
     }
 
+    // **********
+
+
+    // ***** GET-TIME *****
+
     @Test
     public void testGetTimeWhenTimeIsNotNull() {
 
@@ -87,5 +95,54 @@ public class TimeServiceTests {
 
     }
 
+    // **********
 
+
+    // ***** CADASTRAR-TIME *****
+
+    @Test
+    public void testCadastraTimeWhenTimeNomeIsEmpty() {
+
+        Time time = new Time();
+
+        time.setNome("");
+        time.setIdentificador("time-1");
+
+        Assertions.assertThrows(RuntimeException.class,
+                  () -> timeService.cadastrarTime(time));
+
+    }
+
+    @Test
+    public void testCadastraTimeWhenTimeIdentificadorIsEmpty() {
+
+        Time time = new Time();
+
+        time.setNome("SP");
+        time.setIdentificador("");
+
+        Assertions.assertThrows(RuntimeException.class,
+                  () -> timeService.cadastrarTime(time));
+
+    }
+
+    @Test
+    public void testCadastraTimeWhenTimeIsValid() {
+
+        Time time = new Time();
+
+        time.setNome("SP");
+        time.setIdentificador("time-1");
+
+        Mockito.when(timeRepository.save(time)).thenReturn(time);
+
+        Time timeRetorno = timeService.cadastrarTime(time);
+
+        Assertions.assertNotNull(timeRetorno);
+        Assertions.assertEquals("SP", timeRetorno.getNome());
+        Assertions.assertEquals("time-1", timeRetorno.getIdentificador());
+
+    }
+
+      // **********
 }
