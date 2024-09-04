@@ -68,15 +68,15 @@ public class ApostaService {
                     aposta.setStatus("GANHOU");
                 }
 
-                if (aposta.getResultado().equals("VITORIA_MANDANTE") && partidaDTO.isVitoriaMandante()) {
+                else if (aposta.getResultado().equals("VITORIA_MANDANTE") && partidaDTO.isVitoriaMandante()) {
                     aposta.setStatus("GANHOU");
                 }
 
-                if (aposta.getResultado().equals("EMPATE") && partidaDTO.isVitoriaVisitante()) {
+                else if (aposta.getResultado().equals("VITORIA_VISITANTE") && partidaDTO.isVitoriaVisitante()) {
                     aposta.setStatus("GANHOU");
                 }
 
-                if (aposta.getStatus().equals("REALIZADA")) {
+                else {
                     aposta.setStatus("PERDEU");
                 }
             } else {
